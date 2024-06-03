@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router';
 import { User } from '../../entidades/usuario';
+import { routes } from '../../app.routes';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -14,5 +16,14 @@ export class LoginComponent {
 
   public usuario: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date() };
 
-  public login(){}
+  constructor(private route:Router, private usuarioservices: UsuarioService) {
+
+    if (usuarioservices.estoyLogueado()) {
+      this.route.navigateByUrl('/principal/bienvenida')
+    }
+  }
+
+  public login(){
+//    this.route.navigateByUrl('/principal/bienvenida')
+  }
 }

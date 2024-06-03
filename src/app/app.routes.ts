@@ -3,6 +3,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ErrorComponent } from './componentes/error/error.component';
+import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
 
 export const routes: Routes = [
     {
@@ -10,6 +11,7 @@ export const routes: Routes = [
         children:[
             {path:'login', component:LoginComponent},
             {path:'registro', component:RegistroComponent},
+            {path:'bienvenida', component:BienvenidaComponent},
             {path:'**', component:LoginComponent}
         ]
     },

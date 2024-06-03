@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { User } from '../../entidades/usuario';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-registro',
@@ -13,26 +14,26 @@ import { User } from '../../entidades/usuario';
 })
 export class RegistroComponent {
 
-  listaUsuarios: User[] = [];
+  
   public usuario:User = {nombre:'', password:'', mail:'', usuario: '', apellido: '', nacimiento: new Date()  };
   public password2:string= '';
 
 
 
- // constructor(private router:Router,private us:UsuarioService ) {
+  constructor(private router:Router, private us:UsuarioService ) {
     
- // }
+  }
 
-// validarExiste(){
-//  return this.us.listaUsuario.filter( 
-//    t=> t.nombre.toLowerCase() == this.usuario.nombre.toLowerCase()).length == 1 ;
+ validarExiste(){
+ return this.us.listaUsuario.filter( 
+    t=> t.nombre.toLowerCase() == this.usuario.nombre.toLowerCase()).length == 1 ;
     
- // }
+  }
 
   public registrar(){
-         this.listaUsuarios.push(this.usuario);
-         localStorage.setItem('usuarios', JSON.stringify(this.listaUsuarios));
-  //       this.us.listaUsuario= JSON.parse(JSON.stringify(this.us.listaUsuario)) ;
-         
+         this.us.listaUsuario.push(this.usuario);
+         localStorage.setItem('usuarios', JSON.stringify(this.us.listaUsuario));
+         this.us.listaUsuario= JSON.parse(JSON.stringify(this.us.listaUsuario)) ;
+         this.router.navigateByUrl('/principal');
     }
 }
