@@ -1,1 +1,32 @@
-<p>registro works!</p>
+<div class="row">
+        
+    <p class="offset-3 col-3">Usuario </p> <input  class="col-3" type="text" [(ngModel)]="usuario.nombre" >
+</div>
+ <div class="invalid-feedback" >
+   El usuario ya existe
+</div>
+<div class="row">
+        
+    <p class="offset-3 col-3">Usuario </p> <input  class="col-3" type="text" [(ngModel)]="usuario.usuario" >
+    <p class="offset-3 col-3">Nombre </p> <input  class="col-3" type="text" [(ngModel)]="usuario.nombre" >
+</div>
+<div class="row">
+        
+    <p class="offset-3 col-3">Apellido </p> <input  class="col-3" type="text" [(ngModel)]="usuario.apellido" >
+    <p class="offset-3 col-3">Fecha Nacimiento </p> <input  class="col-3" type="date" [(ngModel)]="usuario.nacimiento" >
+</div>
+
+<div class="row">
+    
+    <p class="offset-3 col-3" >contraseña</p> <input class="col-3" type="password" [(ngModel)]="usuario.password" >
+</div>
+<div class="row">    
+    <p class="offset-3 col-3" >Repita contraseña</p> <input class="col-3" type="password" [(ngModel)]="password2" >
+</div>
+<div class="row">
+    
+    <p class="offset-3 col-3" >Mail</p> <input class="col-3" type="email" [(ngModel)]="usuario.mail" >
+</div>
+<div class="row" *ngIf="usuario.password == password2  ">
+    <input  class="offset-3 col-6 btn btn-primary" type="button" (click)="registrar()"  value="Registrar">
+</div>
