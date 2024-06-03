@@ -26,4 +26,11 @@ export class LoginComponent {
   public login(){
 //    this.route.navigateByUrl('/principal/bienvenida')
   }
+
+  public prueba() {
+    this.usuarioservices.mostrarAPi().subscribe(t =>
+      this.probando = (<any>t).mensaje
+    )
+  }
+  public probando: string = "";
 }

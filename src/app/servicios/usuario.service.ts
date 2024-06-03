@@ -11,6 +11,11 @@ export class UsuarioService {
     this.listaUsuario = JSON.parse(localStorage.getItem('usuarios') || '[]');
    // this.setLogueado()
    }
+
+   public mostrarAPi() {
+    return this.http.get("https://ariel_david9895-clinicaapi.mdbgo.io/pruebajson");
+  }
+
    public usuarioLogueado: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date() };
 
    public listaUsuario: User[] = [];
