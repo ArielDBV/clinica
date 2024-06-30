@@ -1,7 +1,4 @@
-<div class="row">
-        
-    <p class="offset-3 col-3">Usuario </p> <input  class="col-3" type="text" [(ngModel)]="usuario.nombre" >
-</div>
+
  <div class="invalid-feedback" >
    El usuario ya existe
 </div>
@@ -28,5 +25,5 @@
     <p class="offset-3 col-3" >Mail</p> <input class="col-3" type="email" [(ngModel)]="usuario.mail" >
 </div>
 <div class="row" *ngIf="usuario.password == password2 && !validarExiste()  ">
-    <input  class="offset-3 col-6 btn btn-primary" type="button" (click)="registrar()"  value="Registrar">
+    <input  class="offset-3 col-6 btn btn-primary" type="button" (click)="registrarEnApi()"  value="Registrar">
 </div>

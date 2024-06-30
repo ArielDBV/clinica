@@ -30,10 +30,20 @@ export class RegistroComponent {
     
   }
 
-  public registrar(){
-         this.us.listaUsuario.push(this.usuario);
-         localStorage.setItem('usuarios', JSON.stringify(this.us.listaUsuario));
-         this.us.listaUsuario= JSON.parse(JSON.stringify(this.us.listaUsuario)) ;
+  //public registrar(){
+   //      this.us.listaUsuario.push(this.usuario);
+    //     localStorage.setItem('usuarios', JSON.stringify(this.us.listaUsuario));
+    //    this.us.listaUsuario= JSON.parse(JSON.stringify(this.us.listaUsuario)) ;
+    //     this.router.navigateByUrl('/principal');
+    //}
+
+    public registrarEnApi(){
+      this.us.registrar(this.usuario).subscribe(
+        x =>{ 
+         console.log(x);
+         this.us.setLogueadoXApi(<User> x);
          this.router.navigateByUrl('/principal');
+        }  
+       );
     }
 }

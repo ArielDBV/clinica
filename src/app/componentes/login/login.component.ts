@@ -25,6 +25,19 @@ export class LoginComponent {
 
   public login(){
 //    this.route.navigateByUrl('/principal/bienvenida')
+this.usuarioservices.loginEnApi(this.usuario).subscribe(
+  x=> {
+    
+    if((<User>x).usuario  != null)
+    {
+      this.usuarioservices.setLogueadoXApi(<User>x);
+
+      //pasar a la pagina de bienvenida
+      this.route.navigateByUrl('/principal/bienvenida');
+    }
+  }
+
+)
   }
 
   public prueba() {
