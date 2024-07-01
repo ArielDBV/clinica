@@ -1,0 +1,12 @@
+::ng-deep .navbar {
+    background-color: #906060 !important;
+  }
+  
+  ::ng-deep .navbar .nav-link {
+    color: white !important;
+  }
+  
+  ::ng-deep .navbar .nav-link:hover {
+    color: lightgreen !important;
+  }
+  

@@ -4,11 +4,13 @@ import { Route, Router, RouterModule } from '@angular/router';
 import { User } from '../../entidades/usuario';
 import { routes } from '../../app.routes';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, LoadingComponent, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,7 +21,7 @@ export class LoginComponent {
   constructor(private route:Router, private usuarioservices: UsuarioService) {
 
     if (usuarioservices.estoyLogueado()) {
-      this.route.navigateByUrl('/principal/bienvenida')
+      route.navigateByUrl('/principal/bienvenida')
     }
   }
 
