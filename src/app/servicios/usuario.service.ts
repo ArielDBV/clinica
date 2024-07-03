@@ -11,6 +11,7 @@ export class UsuarioService {
 
   constructor(public http:HttpClient) {
     this.listaUsuario = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    this.usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado") ?? '{"nombre":""}');
     this.setLogueado()
    }
 
@@ -24,6 +25,7 @@ export class UsuarioService {
 
   public setLogueadoXApi(usuario:User){
     this.usuarioLogueado = usuario;
+    localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
   }
 
   public registrar(usuario:User){
@@ -37,6 +39,12 @@ export class UsuarioService {
    public estoyLogueado() :boolean{
     return this.usuarioLogueado.nombre != '';
   }
+
+  public desloguear() 
+    {
+      this.usuarioLogueado = { nombre: '', password: '', mail: '', usuario: '', apellido: '', nacimiento: new Date() };
+      localStorage.setItem("usuarioLogueado", JSON.stringify(this.usuarioLogueado));
+    }
 
   public setLogueado(){
     if (localStorage.getItem('usuarioLogueado') ?? '' != '')
