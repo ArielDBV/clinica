@@ -13,10 +13,20 @@ export const routes: Routes = [
         path: 'principal', component: PrincipalComponent,children:[
             {path:'login', component:LoginComponent},
             {path:'registro', component:RegistroComponent},
-            {path:'bienvenida', component:BienvenidaComponent, canActivate:[usuarioLogueadoGuard]},
+            //{path:'bienvenida', component:BienvenidaComponent, canActivate:[usuarioLogueadoGuard]},
             {path:'nosotros', component:NosotrosComponent}
         ]
     },
+
+    {
+        path: 'principal', component: PrincipalComponent, canActivate: [usuarioLogueadoGuard],children:[
+            {path:'login', component:LoginComponent},
+            {path:'registro', component:RegistroComponent},
+            //{path:'bienvenida', component:BienvenidaComponent, canActivate:[usuarioLogueadoGuard]},
+            {path:'nosotros', component:NosotrosComponent}
+        ]
+    },
+
     { path: '', redirectTo: 'principal' , pathMatch: 'full' },
     { path: '**', component: ErrorComponent }
     
