@@ -9,6 +9,11 @@ export class UsuarioService {
 
   private APIURL:String = "https://ariel_david9895-clinicaapi.mdbgo.io";
 
+  public usuarioLogueado: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date() };
+
+  public listaUsuario: User[] = [];
+
+
   constructor(public http:HttpClient) {
     this.listaUsuario = JSON.parse(localStorage.getItem('usuarios') || '[]');
     this.usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado") ?? '{"nombre":""}');
@@ -32,10 +37,7 @@ export class UsuarioService {
     return this.http.post(this.APIURL  + "/insertar",usuario);
   }
 
-   public usuarioLogueado: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date() };
-
-   public listaUsuario: User[] = [];
-
+  
    public estoyLogueado() :boolean{
     return this.usuarioLogueado.nombre != '';
   }

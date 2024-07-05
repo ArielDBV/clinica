@@ -17,7 +17,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
 
   public usuario: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date() };
-
+  public listaUsuario:User [] = [];
+  public isLoading:boolean=false;
   constructor(private route:Router, private usuarioservices: UsuarioService) {
 
     if (usuarioservices.estoyLogueado()) {
@@ -27,10 +28,12 @@ export class LoginComponent {
 
   public login(){
 //    this.route.navigateByUrl('/principal/bienvenida')
+this.isLoading = true;
 this.usuarioservices.loginEnApi(this.usuario).subscribe(
   x=> {
     
     if((<User>x).usuario  != null)
+      this.isLoading = false;
     {
       this.usuarioservices.setLogueadoXApi(<User>x);
 
