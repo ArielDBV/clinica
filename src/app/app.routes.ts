@@ -11,7 +11,7 @@ import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
 export const routes: Routes = [
     {
         path: 'principal', component: PrincipalComponent,children:[
-            {path:'login', component:LoginComponent},
+            {path:'login', component:LoginComponent,  canActivate:[usuariodeslogueadoGuard]},
             {path:'registro', component:RegistroComponent},
             {path:'bienvenida', component:BienvenidaComponent, canActivate:[usuarioLogueadoGuard]},
             {path:'nosotros', component:NosotrosComponent}

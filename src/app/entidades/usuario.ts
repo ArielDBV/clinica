@@ -5,5 +5,8 @@ export interface User {
     mail:string;
     usuario:string;
     nacimiento : Date;
+    tipo_usuario:number;
+    autorizado:number;
+    //id_medigo:number;
 }
 

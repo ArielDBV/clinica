@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
 
-  public usuario: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date() };
+  public usuario: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date(), tipo_usuario: 0, autorizado:1 };
   public listaUsuario:User [] = [];
   public isLoading:boolean=false;
   constructor(private route:Router, private usuarioservices: UsuarioService) {
