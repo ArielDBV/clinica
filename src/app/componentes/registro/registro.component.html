@@ -53,7 +53,7 @@
   </ng-template>
 
   <ng-template #registroMedico>
-    <div data-mdb-input-init class="form-outline mb-4">
+    <div data-mdb-input-init class="offset-6 col-3">
         <select class="form-select" aria-label="Default select example" [(ngModel)]="usuario.especialidad" name="especialidad">
           <option value="Clinico">Clinico</option>
           <option value="Traumatologo">Traumatologo</option>
@@ -70,5 +70,5 @@
   </ng-template>
 
 <div class="row" *ngIf="usuario.password == password2 && !validarExiste()  ">
-    <input  class="offset-3 col-6 btn btn-primary" type="button" (click)="registrarEnApi()"  value="Registrar">
+    <input  class="offset-3 col-6 btn btn-primary" type="button" (click)="registrar()"  value="Registrar">
 </div>

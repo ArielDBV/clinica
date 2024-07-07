@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { User } from '../../entidades/usuario';
@@ -20,7 +20,7 @@ export class RegistroComponent {
 
 
 
-  constructor(private router:Router, private us:UsuarioService ) {
+  constructor(private router:Router, private us:UsuarioService, private ngZone:NgZone ) {
     
   }
 
@@ -47,6 +47,55 @@ export class RegistroComponent {
  return this.us.listaUsuario.filter( 
     t=> t.nombre.toLowerCase() == this.usuario.nombre.toLowerCase()).length == 1 ;
     
+  }
+
+  CamposLlenos() {
+    return this.usuario.nombre && this.usuario.apellido && this.usuario.mail && this.usuario.usuario  && this.password2 && this.usuario.password === this.password2;
+  }
+
+  public registrar(){
+
+
+    if(this.CamposLlenos()){
+
+      if(this.usuario.tipo_usuario != 1)
+        this.usuario.autorizado=0;
+      else
+      this.usuario.autorizado=1;
+
+
+      // localStorage.setItem('usuarioLogueado',JSON.stringify(this.usuario));
+      this.us.registrarEnApi(this.usuario).subscribe(
+
+        x=>{
+          console.log(x);
+          //localStorage.setItem('usuarioLogueado',JSON.stringify(<Usuario>x));
+  
+          alert("Usuario creado exitosamente!");
+
+          this.ngZone.run(() => {
+          this.router.navigateByUrl('/principal/login');
+        });
+        
+
+        },
+        error=>{
+        if (error.status === 400) {
+          alert("Error: " + error.error.error);
+        } else {
+          alert("Ocurrió un error al crear el usuario. Por favor, inténtalo nuevamente.");
+        }}
+      );
+
+
+    } else {
+      alert('Por favor, complete todos los campos y asegúrese de que las contraseñas coincidan.');
+    }
+
+    // this.us.listaUsuario.push(this.usuario);
+    // localStorage.setItem('usuarios',JSON.stringify(this.us.listaUsuario));
+    // this.us.listaUsuario=JSON.parse(JSON.stringify(this.us.listaUsuario));
+  
   }
 
   //public registrar(){
