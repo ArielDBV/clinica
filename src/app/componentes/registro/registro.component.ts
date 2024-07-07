@@ -15,7 +15,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
 export class RegistroComponent {
 
   
-  public usuario:User = {nombre:'', password:'', mail:'', usuario: '', apellido: '', nacimiento: new Date() , tipo_usuario: 0, autorizado:1 };
+  public usuario:User = { nombre:'', password:'', mail:'', usuario: '', apellido: '', nacimiento: new Date() , tipo_usuario: 0, autorizado:1 };
   public password2:string= '';
 
 
@@ -23,6 +23,25 @@ export class RegistroComponent {
   constructor(private router:Router, private us:UsuarioService ) {
     
   }
+
+  subirFoto(event: Event, tipo:  'perfil_foto') {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+          const result = e.target?.result as string;
+          
+              
+              this.usuario.perfil_foto = result;
+          
+      };
+      reader.readAsDataURL(file);
+  }
+
+}
 
  validarExiste(){
  return this.us.listaUsuario.filter( 

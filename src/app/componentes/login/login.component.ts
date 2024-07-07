@@ -16,33 +16,49 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
 
-  public usuario: User = { nombre: '', password: '', mail: '', usuario:'', apellido: '', nacimiento: new Date(), tipo_usuario: 0, autorizado:1 };
-  public listaUsuario:User [] = [];
-  public isLoading:boolean=false;
-  constructor(private route:Router, private usuarioservices: UsuarioService) {
+  public usuario: User = { nombre: '', password: '', mail: '', usuario: '', apellido: '', nacimiento: new Date(), tipo_usuario: 0, autorizado:1 };
+  public listaUsuario: User[] = [];
+  public isLoading: boolean = false;
+
+
+  constructor(private route: Router, private usuarioservices: UsuarioService) {
 
     if (usuarioservices.estoyLogueado()) {
+      //Si ya esta logueado, reenvia a bienvenida
       this.route.navigateByUrl('/principal/bienvenida')
     }
   }
 
-  public login(){
-//    this.route.navigateByUrl('/principal/bienvenida')
-this.isLoading = true;
-this.usuarioservices.loginEnApi(this.usuario).subscribe(
-  x=> {
+  public login() {
+    //    this.route.navigateByUrl('/principal/bienvenida')
     
-    if((<User>x).usuario  != null)
-      this.isLoading = false;
-    {
-      this.usuarioservices.setLogueadoXApi(<User>x);
+    this.isLoading = true;
+    this.usuarioservices.loginEnApi(this.usuario).subscribe(
+      x => {
+        
+        if ((<User>x).usuario != null)
+          this.isLoading = false;
+        {
+          if ((<User>x).autorizado == 0) { //Si el usuario no esta habilitado, no se loguea
+            alert("Su usuario aun no esta habilitado. Por favor contactarse con un administrador");
+          } else {
+            this.usuarioservices.setLogueadoXApi(<User>x);
 
-      //pasar a la pagina de bienvenida
-      this.route.navigateByUrl('/principal/bienvenida');
-    }
-  }
+            //Guardamos en el local storage el usuario logueado
+            localStorage.setItem('usuarioLogueado',JSON.stringify(<User>x));
+            
 
-)
+            //pasar a la pagina de bienvenida
+            this.route.navigateByUrl('/principal/bienvenida');
+          }
+
+
+        }
+      }
+
+    )
+    this.usuarioservices.estoyLogueado();
+    this.isLoading = false;
   }
 
   public prueba() {
